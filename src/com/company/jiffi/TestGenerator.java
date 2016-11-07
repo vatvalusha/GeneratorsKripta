@@ -19,9 +19,12 @@ public class TestGenerator {
         jGen.getL2().setValues(1, 0, 0, 1, 1, 1, 0, 1, 0, 1);
         jGen.getL3().setValues(1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1);
 
-        jGen.step(100);
+
         System.out.println("Jiffy: ");
-        System.out.println(jGen.getGamma());
+        System.out.println(jGen.generatorB(100000));
+
+//        System.out.println(jGen.getOutput());
+//        System.out.println(jGen.getGamma());
 
 
     }

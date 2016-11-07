@@ -1,19 +1,24 @@
 package com.company.Lehmer;
 
+import com.company.Generator;
+import util.BitConverter;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by user on 17.09.2016.
  */
-public class LehmerHight {
+public class LehmerHight implements Generator {
+
     private final long a = 65537;
     private final long m = 4294967296L;
     private final long c = 119;
-    private ArrayList<Integer> list = new ArrayList();
+    private List<Integer> list = new ArrayList();
     private long xn = 3453465L;
-
+    List<Integer> out = new ArrayList<>();
     public String getNextSet(){
         String buff;
         long xnNext = ((a * xn) + c) % m;
@@ -27,7 +32,7 @@ public class LehmerHight {
         return buff.substring(0, 8);
     }
 
-    public ArrayList getSequence(int times){
+    public List getSequence(int times){
         String line;
         for(int i = 0; i < times; i++){
             line = getNextSet();
@@ -37,7 +42,16 @@ public class LehmerHight {
         }
         return list;
     }
-    protected ArrayList getOut(){
+
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesOutput(list);
+    }
+    @Override
+    public List<Integer> generatorB(int m) {
+        getSequence(m);
+        return getBytesOutput();
+    }
+    protected List getOut(){
         return list;
     }
     public void writeResult(){
@@ -48,4 +62,6 @@ public class LehmerHight {
             e.printStackTrace();
         }
     }
+
+
 }

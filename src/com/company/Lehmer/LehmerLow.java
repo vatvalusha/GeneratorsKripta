@@ -1,13 +1,17 @@
 package com.company.Lehmer;
 
+import com.company.Generator;
+import util.BitConverter;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by user on 17.09.2016.
  */
-public class LehmerLow{
+public class LehmerLow implements Generator {
     private final long a = 65537;
     private final long m = 4294967296L;
     private final long c = 119;
@@ -25,7 +29,7 @@ public class LehmerLow{
                 buff = "0" + buff;
             }
         }
-        return buff.substring(24);
+        return buff.substring(24, buff.length());
     }
 
     public ArrayList getSequence(int times){
@@ -37,6 +41,14 @@ public class LehmerLow{
             }
         }
         return list;
+    }
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesOutput(list);
+    }
+    @Override
+    public List<Integer> generatorB(int m) {
+        getSequence(m);
+        return getBytesOutput();
     }
 
     public ArrayList getOut(){

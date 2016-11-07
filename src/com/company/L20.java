@@ -1,52 +1,75 @@
 package com.company;
 
+import util.BitConverter;
+
+import javax.print.DocFlavor;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
  * Created by user on 12.09.2016.
  */
-public class L20 {
-//    int[] a = {0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1};
-//    int trials = 1000;    // number of steps
-//    int n = a.length;                          // length of register
-//    int TAP = 8;                               // tap position
-//
-//
-//    // Simulate operation of shift register.
-//    public void getRandom() {
-//        for (int t = 0; t < trials; t++) {
-//
-//            // Simulate one shift-register step.
-//            int next = (a[n - 1] ^ a[TAP]);  // Compute next bit.
-//            for (int i = n - 1; i > 0; i--)
-//                a[i] = a[i - 1];                  // Shift one position.
-//            a[0] = next;                       // Put next bit on right end.
-//
-//            if (next == 1) System.out.print("1");
-//            else System.out.print("0");
-//            System.out.print(" ");
-//        }
-//        System.out.println();
-//    }
-private int state[];
+public class L20 implements Generator {
 
-    public L20(){
+    private int state[];
+    private List<Integer> output = new ArrayList<>();
+
+    public L20() {
         state = new int[20];
         Random random = new Random();
-        for(int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             state[i] = random.nextInt(2);
         }
     }
-    public int getNext(){
+
+    public void generatorL20(int m) {
+        for (int i = 0; i < m; i++) {
+            getNext();
+        }
+    }
+
+    public int getNext() {
         int temp = state[16] + state[14] + state[10] + state[0];
-        temp = temp%2;
-        for(int i = 0; i < 19; i++){
-            state[i] = state[i+1];
+        temp = temp % 2;
+        for (int i = 0; i < 19; i++) {
+            state[i] = state[i + 1];
         }
         state[19] = temp;
+        output.add(state[19]);
         return state[19];
     }
+
+    public List<Integer> getBitArray() {
+        return output;
+    }
+
+    public List<Integer> getBytesOutput() {
+        getBitArray();
+        return BitConverter.getBytesOutput(output);
+    }
+
+    public List ppp() {
+        List list = new ArrayList<>();
+        for(
+        int i = 0;
+        i<1000;i++)
+
+        {
+    //            map.put(i,0);
+            list.add(i, 0);
+        }
+        return list;
+//    System.out.println(list);
+}
+    @Override
+    public List<Integer> generatorB(int m) {
+//        generatorL20(m*8);
+//        return getBytesOutput();
+        return ppp();
+    }
+
     public String toString(){
         return Arrays.toString(state);
     }

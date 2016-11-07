@@ -7,21 +7,27 @@ import java.util.Random;
 /**
  * Created by user on 18.09.2016.
  */
-public class JavaGenerator {
+public class JavaGenerator implements Generator {
 
     Random random;
-    List<Long> list;
+    List<Integer> list;
 
-    protected JavaGenerator(){
+    public JavaGenerator(){
         random = new Random();
         list = new ArrayList<>();
     }
     protected void javaGenerator(int n){
         for(int i = 0; i<n; i++){
-            list.add((random.nextLong()%256+256)%256);
+            list.add((random.nextInt()%256+256)%256);
         }
     }
     protected List getList(){
         return list;
+    }
+
+    @Override
+    public List<Integer> generatorB(int m) {
+        javaGenerator(m);
+        return getList();
     }
 }

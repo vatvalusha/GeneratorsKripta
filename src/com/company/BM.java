@@ -2,6 +2,8 @@ package com.company;
 
 
 
+import util.BitConverter;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Random;
 /**
  * Created by user on 18.09.2016.
  */
-public class BM {
+public class BM implements Generator {
 
     BigInteger p;
     BigInteger a;
@@ -24,7 +26,7 @@ public class BM {
     public BM(){
         Random random = new Random();
         out = new ArrayList<>();
-        String p1 = "CEA42B987C44FA642D80AD9F51F10457690DEF10C83D0BC1BCEE12FC3B6093E3";
+        String p1 = "0CEA42B987C44FA642D80AD9F51F10457690DEF10C83D0BC1BCEE12FC3B6093E3";
         String a1 = "5B88C41246790891C095E2878880342E88C79974303BD0400B090FE38A688356";
         String q1 = "675215CC3E227D3216C056CFA8F8822BB486F788641E85E0DE77097E1DB049F1";
         p = new BigInteger(p1, 16);
@@ -57,6 +59,15 @@ public class BM {
         return out;
     }
 
+    public List<Integer> getBytesOutput() {
+        return BitConverter.getBytesOutput(out);
+    }
+
+    @Override
+    public List<Integer> generatorB(int m) {
+        generatorBM(m);
+        return getBytesOutput();
+    }
     public BigInteger getP() {
         return p;
     }
@@ -108,4 +119,6 @@ public class BM {
     public void setOut(List<Integer> out) {
         this.out = out;
     }
+
+
 }

@@ -8,14 +8,18 @@ public class MainLehmer {
         //LehmerLow--------------------------------------------------
         System.out.println("LehmerLow:");
         LehmerLow lehmerLow = new LehmerLow();
-        System.out.println(lehmerLow.getSequence(10000));
-        lehmerLow.writeResult();
+        System.out.println(lehmerLow.generatorB(10000));
+//        lehmerLow.writeResult();
+//
+//        int c = 0;
+//        String f = String.valueOf(c);
+//        System.out.println("1"+f);
 
         //LehmerHight--------------------------------------------------
         System.out.println("LehmerHight: ");
         LehmerHight lehmerHight = new LehmerHight();
-        System.out.println(lehmerHight.getSequence(1000));
-        lehmerHight.writeResult();
+        System.out.println(lehmerHight.generatorB(10000));
+//        lehmerHight.writeResult();
 
     }
 }
